@@ -12,17 +12,13 @@ import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
 
 const MENU_STYLES = {
-  color: 'primary.main',
-  bgcolor: 'white',
+  color: 'white',
+  bgcolor: 'transparent',
   border: 'none',
   paddingX: '5px',
   borderRadius: '4px',
-  '& .MuiSvgIcon-root': {
-    color: 'primary.main'
-  },
-  '&:hover': {
-    bgcolor: 'primary.50'
-  }
+  '.MuiSvgIcon-root': { color: 'white' },
+  '&:hover': { bgcolor: 'primary.50' }
 }
 
 function boardBar() {
@@ -36,7 +32,8 @@ function boardBar() {
       gap: 2,
       paddingX: 2,
       overflowX: 'auto',
-      borderTop: '1px solid #00bfa5'
+      bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
+      borderBottom: '1px solid #FFFFFF'
     }}>
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
         <Chip
@@ -76,7 +73,18 @@ function boardBar() {
       </Box>
 
       <Box sx={{ display: 'flex', alignItems: 'center', gap: 2 }}>
-        <Button variant="outlined" startIcon={<PersonAddIcon/>}>Invite</Button>
+        <Button
+          variant="outlined"
+          startIcon={<PersonAddIcon />}
+          sx={{
+            color: 'white',
+            borderColor: 'white',
+            '&:hover': { borderColor: 'white' }
+          }}
+        >
+          Invite
+        </Button>
+
         <AvatarGroup
           max={6}
           sx={{
@@ -84,61 +92,62 @@ function boardBar() {
               width: 34,
               height: 34,
               fontSize: 16,
+              border: 'none'
             }
           }}
         >
-          <Tooltip title='LongNguyen'>
+          <Tooltip title='Long Nguyen'>
             <Avatar
-              alt="LongNguyen"
+              alt="Long Nguyen"
               src="https://cdn.discordapp.com/avatars/820696454678315090/4e3000407dffe24404a326f46ecb2ac5.webp?size=160"
             />
           </Tooltip>
 
-          <Tooltip title='LongNguyen'>
+          <Tooltip title='Aaron Fisher'>
             <Avatar
-              alt="LongNguyen"
+              alt="Hunter Reeves"
               src="https://i.pinimg.com/736x/de/5a/f3/de5af380b168d9825765c08cf5f0739a.jpg"
             />
           </Tooltip>
 
-          <Tooltip title='LongNguyen'>
+          <Tooltip title='Janie Walsh'>
             <Avatar
-              alt="LongNguyen"
+              alt="Maurice Wade"
               src="https://i.pinimg.com/474x/e2/d4/a1/e2d4a1924b2e3e0044ee09cb5f94e33d.jpg"
             />
           </Tooltip>
 
-          <Tooltip title='LongNguyen'>
+          <Tooltip title='Bessie Weber'>
             <Avatar
-              alt="LongNguyen"
+              alt="Polly Ray"
               src="https://i.pinimg.com/474x/84/0d/da/840dda9ca3e51148415fc54a9724991d.jpg"
             />
           </Tooltip>
 
-          <Tooltip title='LongNguyen'>
+          <Tooltip title='Estelle Palmer'>
             <Avatar
-              alt="LongNguyen"
+              alt="Craig Montgomery"
               src="https://i.pinimg.com/474x/bb/87/18/bb87180897cb4cb694cd692966a0ab15.jpg"
             />
           </Tooltip>
 
-          <Tooltip title='LongNguyen'>
+          <Tooltip title='Alice Cannon'>
             <Avatar
-              alt="LongNguyen"
+              alt="Joel Bowers"
               src="https://i.pinimg.com/474x/88/48/06/884806a3ae2cf6355c2b8862349064e6.jpg"
             />
           </Tooltip>
 
-          <Tooltip title='LongNguyen'>
+          <Tooltip title='Ida Owens'>
             <Avatar
-              alt="LongNguyen"
+              alt="Chester Luna"
               src="https://i.pinimg.com/474x/fd/37/35/fd373555b828325377219b09d975ecf3.jpg"
             />
           </Tooltip>
 
-          <Tooltip title='LongNguyen'>
+          <Tooltip title='Verna Hines'>
             <Avatar
-              alt="LongNguyen"
+              alt="Rhoda Elliott"
               src="https://i.pinimg.com/474x/4a/f4/a8/4af4a8ce36e051bae34590783cbf1561.jpg"
             />
           </Tooltip>

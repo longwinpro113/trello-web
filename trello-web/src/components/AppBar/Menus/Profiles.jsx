@@ -32,7 +32,7 @@ function Profiles() {
                     aria-haspopup="true"
                     aria-expanded={open ? 'true' : undefined}>
 
-                    <Avatar sx={{ width: 34, height: 34 }}
+                    <Avatar sx={{ width: 36, height: 36 }}
                         src='https://cdn.discordapp.com/avatars/820696454678315090/4e3000407dffe24404a326f46ecb2ac5.webp?size=160'
                         alt='My Profile Pic' />
 
