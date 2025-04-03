@@ -54,7 +54,7 @@
     "@babel/types" "^7.26.10"
     "@jridgewell/gen-mapping" "^0.3.5"
     "@jridgewell/trace-mapping" "^0.3.25"
-    jsesc "^3.0.2"
+    jsesc "^3.0.2" 
 
 "@babel/helper-compilation-targets@^7.26.5":
   version "7.26.5"
