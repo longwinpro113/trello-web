@@ -10,6 +10,7 @@ import AvatarGroup from '@mui/material/AvatarGroup'
 import Tooltip from '@mui/material/Tooltip'
 import Button from '@mui/material/Button'
 import PersonAddIcon from '@mui/icons-material/PersonAdd'
+import { capitalizeFirstLetter } from '~/utils/formatters'
 
 const MENU_STYLES = {
   color: 'white',
@@ -21,7 +22,7 @@ const MENU_STYLES = {
   '&:hover': { bgcolor: 'primary.50' }
 }
 
-function boardBar() {
+function boardBar({ board }) {
   return (
     <Box sx={{
       width: '100%',
@@ -33,7 +34,7 @@ function boardBar() {
       paddingX: 2,
       overflowX: 'auto',
       bgcolor: (theme) => (theme.palette.mode === 'dark' ? '#34495e' : '#1976d2'),
-      
+
       '&::-webkit-scrollbar-track': {
         margin: 2
       }
@@ -42,14 +43,14 @@ function boardBar() {
         <Chip
           sx={MENU_STYLES}
           icon={<DashboardIcon />}
-          label="LongNguyen MERN Stack"
+          label={board?.title}
           clickable // onClick={() => {}}
         />
 
         <Chip
           sx={MENU_STYLES}
           icon={<VpnLockIcon />}
-          label="Public/Private Workspace"
+          label={capitalizeFirstLetter(board?.type)}
           clickable // onClick={() => {}}
         />
 

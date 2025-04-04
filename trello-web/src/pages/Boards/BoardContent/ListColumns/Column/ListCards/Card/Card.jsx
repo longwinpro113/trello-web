@@ -9,39 +9,55 @@ import GroupIcon from '@mui/icons-material/Group'
 import CommentIcon from '@mui/icons-material/Comment'
 import AttachmentIcon from '@mui/icons-material/Attachment'
 
-function Card({ temporaryHideMedia }) {
-    if(temporaryHideMedia) {
-        return(
-            <MuiCard sx={{
-                cursor: 'pointer',
-                boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
-                overflow: 'unset'
-            }}>
-                <CardContent sx={{ padding: 1.5, '&:last-child': { padding: 1.5 } }}>
-                    <Typography>Card 02</Typography>
-                </CardContent>
-            </MuiCard>
-        )
+function Card({ card }) {
+
+    const shouldShowCardActions = () => {
+        return !!card?.memberIds?.length || !!card?.comments?.length || !!card?.attachments?.length
     }
+
     return (
         <MuiCard sx={{
             cursor: 'pointer',
             boxShadow: '0 1px 1px rgba(0, 0, 0, 0.2)',
             overflow: 'unset'
         }}>
-            <CardMedia
-                sx={{ height: 140 }}
-                image="https://trello.com/1/cards/54c9431da5320670f0de1489/attachments/54c94670208708e9a3a5c02a/previews/54c94672208708e9a3a5c02b/download/shutterstock_15708843222.jpg"
-                title="green iguana"
-            />
+            {card?.cover &&
+                <CardMedia
+                    sx={{ height: 140 }}
+                    image={card?.cover}
+                    title="Google Data"
+                />
+            }
             <CardContent sx={{ padding: 1.5, '&:last-child': { padding: 1.5 } }}>
-                <Typography>Google Analytics data</Typography>
+                <Typography>{card?.title}</Typography>
             </CardContent>
-            <CardActions sx={{ padding: '0px 4px 8px 4px' }}>
-                <Button size="small" startIcon={<GroupIcon />}>20</Button>
-                <Button size="small" startIcon={<CommentIcon />}>10</Button>
-                <Button size="small" startIcon={<AttachmentIcon />}>10</Button>
-            </CardActions>
+
+            {shouldShowCardActions() &&
+                <CardActions sx={{ padding: '0px 4px 8px 4px' }}>
+
+                    {/* Mapping number memberID in mock-data */}
+                    {!!card?.memberIds?.length &&
+                        <Button size="small" startIcon={<GroupIcon />}>
+                            {card?.memberIds?.length}
+                        </Button>
+                    }
+
+                    {/* Mapping number comments in mock-data */}
+                    {!!card?.comments?.length &&
+                        <Button size="small" startIcon={<CommentIcon />}>
+                            {card?.comments?.length}
+                        </Button>
+                    }
+
+                    {/* Mapping number attachments in mock-data */}
+                    {!!card?.attachments?.length &&
+                        <Button size="small" startIcon={<AttachmentIcon />}>
+                            {card?.attachments?.length}
+                        </Button>
+                    }
+                </CardActions>
+            }
+
         </MuiCard>
     )
 }
