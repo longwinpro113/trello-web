@@ -12,7 +12,7 @@ function Board() {
 
     useEffect(() => {
         // Call API get board details
-        const boardID = '68ef6983f72c237870b0b692ai'
+        const boardID = '68ef6983f72c237870b0b692'
 
         fetchBoardDetailsAPI(boardID).then(board => {
             setBoard(board)
