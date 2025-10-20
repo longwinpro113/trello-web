@@ -4,8 +4,8 @@ import { mapOrder } from '~/utils/sorts'
 import {
   DndContext,
   // PointerSensor,
-  MouseSensor,
-  TouchSensor,
+  // MouseSensor,
+  // TouchSensor,
   useSensor,
   useSensors,
   DragOverlay,
@@ -17,6 +17,7 @@ import {
   rectIntersection,
   getFirstCollision
 } from '@dnd-kit/core'
+import { TouchSensor, MouseSensor } from '~/customLibraries/DnDKitSensors'
 import { arrayMove } from '@dnd-kit/sortable'
 import { useEffect, useState, useCallback, useRef } from 'react'
 import { cloneDeep } from 'lodash'

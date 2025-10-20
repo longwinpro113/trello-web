@@ -76,7 +76,6 @@ function AppBar() {
           >
             Create
           </Button>
-
         </Box>
       </Box>
 
@@ -135,7 +134,6 @@ function AppBar() {
         </Tooltip>
 
         <Profiles />
-
       </Box>
     </Box>
   )
