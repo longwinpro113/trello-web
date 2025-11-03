@@ -1,25 +1,35 @@
+import { useState } from 'react'
+import { toast } from 'react-toastify'
+import 'react-toastify/dist/ReactToastify.css'
 import Box from '@mui/material/Box'
 import Column from './Column/Column'
 import Button from '@mui/material/Button'
 import NoteAddIcon from '@mui/icons-material/NoteAdd'
 import { SortableContext, horizontalListSortingStrategy } from '@dnd-kit/sortable'
-import { useState } from 'react'
 import { TextField } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 // import theme from '~/theme'
 
-function ListColumns({ columns }) {
+function ListColumns({ columns, createNewColumn, createNewCard }) {
     const [openNewColumnForm, setOpenNewColumnForm] = useState(false)
     const toggleNewColumnForm = () => { setOpenNewColumnForm(!openNewColumnForm) }
 
     const [newColumnTitle, setNewColumnTitle] = useState('')
-    const addNewColumn = () => { 
-        if(!newColumnTitle) {
-            // console.log('Please enter Column Title') 
+    const addNewColumn = async () => {
+        if (!newColumnTitle) {
+            // toast.error('Please enter Column Title') 
+            toast.warn('Please enter Column Title', { position: "bottom-right" })
             return
         }
-        // console.log(newColumnTitle)
-        //Gọi API tạo Column mới
+
+        //Tạo dữ liệu để gọi API
+        const newColumnData = {
+            title: newColumnTitle
+        }
+
+        console.log('newColumnData', newColumnData)
+
+        await createNewColumn(newColumnData)
 
         //Đóng trạng thái thêm Column mới và clear input
         toggleNewColumnForm()
@@ -40,7 +50,7 @@ function ListColumns({ columns }) {
                 // Thiết lập khoảng cách (margin) cho Scrollbar ở dưới cùng của Column Content
                 '&::-webkit-scrollbar-track': { margin: 2 }
             }}>
-                {columns?.map(column => (<Column key={column._id} column={column} />))}
+                {columns?.map(column => (<Column key={column._id} column={column} createNewCard={createNewCard} />))}
 
                 {!openNewColumnForm
                     ? <Box onClick={toggleNewColumnForm} sx={{
@@ -96,25 +106,26 @@ function ListColumns({ columns }) {
                             }}
                         />
                         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
-                            <Button 
+                            <Button
                                 onClick={addNewColumn}
                                 variant='contained' color='success' size='small'
-                                sx={{ 
-                                    boxShadow: 'none', 
+                                sx={{
+                                    boxShadow: 'none',
                                     border: '0.5px solid',
                                     bgcolor: (theme) => theme.palette.success.main,
-                                    '&:hover': { 
-                                        bgcolor: (theme) => theme.palette.success.main }
+                                    '&:hover': {
+                                        bgcolor: (theme) => theme.palette.success.main
+                                    }
                                 }}>
                                 Add Column
                             </Button>
 
                             <CloseIcon
                                 fontSize='small'
-                                sx={{ 
-                                    color: 'white', 
+                                sx={{
+                                    color: 'white',
                                     cursor: 'pointer',
-                                    '&:hover': { color: (theme) => theme.palette.warning.light}
+                                    '&:hover': { color: (theme) => theme.palette.warning.light }
                                 }}
                                 onClick={toggleNewColumnForm}
                             />

@@ -1,4 +1,5 @@
 import { useState } from 'react'
+import { toast } from 'react-toastify'
 import Box from '@mui/material/Box'
 import Typography from '@mui/material/Typography'
 import Button from '@mui/material/Button'
@@ -24,7 +25,7 @@ import { TextField } from '@mui/material'
 import CloseIcon from '@mui/icons-material/Close'
 
 
-function Column({ column }) {
+function Column({ column, createNewCard }) {
     const { attributes, listeners, setNodeRef, transform, transition, isDragging } = useSortable({
         id: column._id,
         data: { ...column }
@@ -48,13 +49,18 @@ function Column({ column }) {
     const toggleNewCardForm = () => { setOpenNewCardForm(!openNewCardForm) }
 
     const [newCardTitle, setNewCardTitle] = useState('')
-    const addNewCard = () => {
+    const addNewCard = async () => {
         if (!newCardTitle) {
-            // console.log('Please enter Card Title') 
+            toast.warn('Please enter Card Title', { position: "bottom-left" })
             return
         }
         // console.log(newCardTitle)
-        //Gọi API tạo Card mới
+        const newCardData = {
+            title: newCardTitle,
+            columnId: column._id
+        }
+
+        await createNewCard(newCardData)
 
         //Đóng trạng thái thêm Card mới và clear input
         toggleNewCardForm()

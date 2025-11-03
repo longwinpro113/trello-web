@@ -31,7 +31,7 @@ const ACTIVE_DRAG_ITEM_TYPE = {
   'CARD': 'ACTIVE_DRAG_ITEM_TYPE_CARD'
 }
 
-function BoardContent({ board }) {
+function BoardContent({ board, createNewColumn, createNewCard }) {
   //? Sử dụng sensors để quản lý sự kiện kéo thả
   // const pointerSensor = useSensor(PointerSensor, { activationConstraint: { distance: 10 } })
 
@@ -235,7 +235,7 @@ function BoardContent({ board }) {
 
   const collisionDetectionStrategy = useCallback((args) => {
     if (activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) {
-      return closestCorners({...args})
+      return closestCorners({ ...args })
     }
 
     const pointerIntersections = pointerWithin(args)
@@ -244,20 +244,20 @@ function BoardContent({ board }) {
     let overId = getFirstCollision(intersections, 'id')
 
     if (overId) {
-      const checkColumn = orderedColumns.find(column => column._id === overId) 
+      const checkColumn = orderedColumns.find(column => column._id === overId)
 
       if (checkColumn) {
         overId = closestCenter({
           ...args,
           droppableContainers: args.droppableContainers.filter(container => {
-            return container.id !== overId && (checkColumn?.cardOrderIds?.includes(container.id)) 
+            return container.id !== overId && (checkColumn?.cardOrderIds?.includes(container.id))
           })
         })[0]?.id
       }
 
       lastOverId.current = overId
 
-      return [{ id: overId}]
+      return [{ id: overId }]
     }
 
     return lastOverId.current ? [{ id: lastOverId.current }] : []
@@ -279,7 +279,11 @@ function BoardContent({ board }) {
         height: (theme) => theme.trello.boardContentHeight,
         padding: '10px 0'
       }}>
-        <ListColumns columns={orderedColumns} />
+        <ListColumns
+          columns={orderedColumns}
+          createNewColumn={createNewColumn}
+          createNewCard={createNewCard}
+        />
         <DragOverlay dropAnimation={customDropAnimation}>
           {!activeDragItemType && null}
           {(activeDragItemType === ACTIVE_DRAG_ITEM_TYPE.COLUMN) && <Column column={activeDragItemData} />}
